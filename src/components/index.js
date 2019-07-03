@@ -4,17 +4,16 @@ import {castArray} from 'lodash';
 
 import defaultTheme from '../themes/default';
 import defaultAnimations from '../themes/animations';
-import {randomString} from '../util';
 import {Ul} from './common';
 import defaultDecorators from './Decorators';
 import TreeNode from './TreeNode';
 
 const TreeBeard = ({animations, decorators, data, separateToggleEvent, onToggle, onClickHeader, style}) => (
     <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
-        {castArray(data).map(node => (
+        {castArray(data).map((node, index) => (
             <TreeNode
                 {...{decorators, node, separateToggleEvent, onToggle, onClickHeader, animations}}
-                key={node.id || randomString()}
+                key={node.id || index}
                 style={{...defaultTheme.tree.node, ...style.tree.node}}
             />
         ))}
