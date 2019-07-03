@@ -26,7 +26,7 @@ class Container extends PureComponent {
     }
 
     render() {
-        const {style, decorators, terminal, onClick, onClickHeader, node} = this.props;
+        const {style, decorators, terminal, onClick, onClickHeader, onRightClickHeader, node} = this.props;
         return (
             <div
                 onClick={onClick ? () => onClick() : null}
@@ -36,7 +36,9 @@ class Container extends PureComponent {
                 <decorators.Header
                     node={node}
                     style={style.header}
-                    onClick={onClickHeader} />
+                    onClick={onClickHeader}
+                    onRightClick={onRightClickHeader}
+                />
             </div>
         );
     }
@@ -49,6 +51,7 @@ Container.propTypes = {
     onClick: PropTypes.func,
     onClickToggle: PropTypes.func,
     onClickHeader: PropTypes.func,
+    onRightClickHeader: PropTypes.func,
     animations: PropTypes.oneOfType([
         PropTypes.object,
         PropTypes.bool,

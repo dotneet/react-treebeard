@@ -8,32 +8,44 @@ import {Ul} from './common';
 import defaultDecorators from './Decorators';
 import TreeNode from './TreeNode';
 
-const TreeBeard = ({animations, decorators, data, separateToggleEvent, onToggle, onClickHeader, style}) => (
-    <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
+const TreeBeard = (props) => {
+    const {
+        animations,
+        decorators,
+        data,
+        separateToggleEvent,
+        onToggle,
+        onClickHeader,
+        onRightClickHeader,
+        style,
+    } = props;
+    const nodeStyle = {...defaultTheme.tree.node, ...style.tree.node};
+    return <Ul style={{...defaultTheme.tree.base, ...style.tree.base}}>
         {castArray(data).map((node, index) => (
             <TreeNode
-                {...{decorators, node, separateToggleEvent, onToggle, onClickHeader, animations}}
+                {...{decorators, node, separateToggleEvent, onToggle, onClickHeader, onRightClickHeader, animations}}
                 key={node.id || index}
-                style={{...defaultTheme.tree.node, ...style.tree.node}}
+                style={nodeStyle}
             />
         ))}
-    </Ul>
-);
+    </Ul>;
+};
 
 TreeBeard.propTypes = {
     style: PropTypes.object,
     data: PropTypes.oneOfType([
         PropTypes.object,
-        PropTypes.array
+        PropTypes.array,
     ]).isRequired,
     animations: PropTypes.oneOfType([
         PropTypes.object,
-        PropTypes.bool
+        PropTypes.bool,
     ]),
     separateToggleEvent: PropTypes.bool,
     onToggle: PropTypes.func,
     onClickHeader: PropTypes.func,
-    decorators: PropTypes.object
+    onRightClickHeader: PropTypes.func,
+    decorators: PropTypes.object,
 };
 
 TreeBeard.defaultProps = {

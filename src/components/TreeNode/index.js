@@ -74,6 +74,7 @@ class TreeNode extends PureComponent {
             separateToggleEvent,
             onToggle,
             onClickHeader,
+            onRightClickHeader,
         } = this.props;
 
         if (node.loading) {
@@ -91,7 +92,7 @@ class TreeNode extends PureComponent {
             <Ul style={style.subtree}>
                 {children.map((child, index) => (
                     <TreeNode
-                        {...{separateToggleEvent, onToggle, onClickHeader, animations, style}}
+                        {...{separateToggleEvent, onToggle, onClickHeader, onRightClickHeader, animations, style}}
                         decorators={propDecorators}
                         key={child.id || index}
                         node={child}
@@ -102,7 +103,7 @@ class TreeNode extends PureComponent {
     }
 
     render() {
-        const {node, style, separateToggleEvent} = this.props;
+        const {node, style, separateToggleEvent, onRightClickHeader} = this.props;
         const decorators = this.decorators();
         const animations = this.animations();
         const {...restAnimationInfo} = animations.drawer;
@@ -112,6 +113,7 @@ class TreeNode extends PureComponent {
                     {...{decorators, animations, node, style}}
                     onClick={separateToggleEvent ? null : () => this.onClick()}
                     onClickHeader={separateToggleEvent ? () => this.onClickHeader() : null}
+                    onRightClickHeader={separateToggleEvent ? onRightClickHeader : null}
                     onClickToggle={separateToggleEvent ? () => this.onClickToggle() : null}
                 />
                 <Drawer restAnimationInfo={{...restAnimationInfo}}>
@@ -126,6 +128,7 @@ TreeNode.propTypes = {
     separateToggleEvent: PropTypes.bool,
     onToggle: PropTypes.func,
     onClickHeader: PropTypes.func,
+    onRightClickHeader: PropTypes.func,
     style: PropTypes.object.isRequired,
     node: PropTypes.object.isRequired,
     decorators: PropTypes.object.isRequired,
