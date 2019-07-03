@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
@@ -12,11 +12,11 @@ const Toggle = ({onClick, style}) => {
     const {height, width} = style;
     const midHeight = height * 0.5;
     const points = `0,0 0,${height} ${width},${midHeight}`;
-    const click = useCallback(() => {
+    const click = () => {
         if (onClick) {
             onClick();
         }
-    }, [onClick]);
+    }
 
     return (
         <Div style={style.base} onClick={click}>
