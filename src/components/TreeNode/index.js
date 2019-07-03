@@ -4,7 +4,6 @@ import styled from '@emotion/styled';
 import {isArray} from 'lodash';
 
 import defaultAnimations from '../../themes/animations';
-import {randomString} from '../../util';
 import {Ul} from '../common';
 import NodeHeader from '../NodeHeader';
 import Drawer from './Drawer';
@@ -60,11 +59,11 @@ class TreeNode extends PureComponent {
 
         return (
             <Ul style={style.subtree}>
-                {children.map(child => (
+                {children.map((child, index) => (
                     <TreeNode
                         {...{onToggle, animations, style}}
                         decorators={propDecorators}
-                        key={child.id || randomString()}
+                        key={child.id || index}
                         node={child}
                     />
                 ))}
